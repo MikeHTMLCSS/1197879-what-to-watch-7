@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
+
 const FILMS = [
   {
     movieTitle: 'Fantastic Beasts: The Crimes of Grindelwald',
@@ -88,6 +89,7 @@ const HEADER = {
   style: 'Drama',
   date: '2014',
 };
+
 ReactDOM.render(
   <App films={FILMS} header={HEADER}/>,
   document.getElementById('root'),

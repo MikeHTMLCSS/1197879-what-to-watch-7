@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Film from '../film/film.jsx';
+import {Link} from 'react-router-dom';
+import Film from '../movieCard/movieCard.jsx';
+
 function Main({films, header}) {
   return (
     <body>
-
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
@@ -36,23 +37,19 @@ function Main({films, header}) {
           </symbol>
         </svg>
       </div>
-
       <section className="film-card">
         <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
-
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
@@ -60,24 +57,21 @@ function Main({films, header}) {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <Link className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
-
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
-
             <div className="film-card__desc">
               <h2 className="film-card__title">{header.filmTitle}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{header.style}</span>
                 <span className="film-card__year">{header.date}</span>
               </p>
-
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
@@ -96,71 +90,65 @@ function Main({films, header}) {
           </div>
         </div>
       </section>
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <Link href="#" className="catalog__genres-link">All genres</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <Link href="#" className="catalog__genres-link">Comedies</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <Link href="#" className="catalog__genres-link">Crime</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <Link href="#" className="catalog__genres-link">Documentary</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <Link href="#" className="catalog__genres-link">Dramas</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <Link href="#" className="catalog__genres-link">Horror</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids &amp; Family</a>
+              <Link href="#" className="catalog__genres-link">Kids &amp; Family</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <Link href="#" className="catalog__genres-link">Romance</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <Link href="#" className="catalog__genres-link">Sci-Fi</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <Link href="#" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
-
           <div className="catalog__films-list">
             {films.map((film) => <Film key={film.movieTitle} movieTitle={film.movieTitle} src={film.src} />)}
           </div>
-
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
-
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
-
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
         </footer>
       </div>
-
     </body>
   );
 }
+
 Main.propTypes = {
   films: PropTypes.arrayOf({
     movieTitle: PropTypes.string.isRequired,
@@ -172,4 +160,5 @@ Main.propTypes = {
     date: PropTypes.string.isRequired,
   },
 };
+
 export default Main;
