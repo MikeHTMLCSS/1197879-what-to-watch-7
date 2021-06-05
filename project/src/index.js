@@ -2,7 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-const FILMS = [
+export const RoutePath = {
+  MAIN: '/',
+  SIGNIN: '/login',
+  MYLIST: '/mylist',
+  FILM: '/films/:id',
+  ADDREVIEW: '/films/:id/review',
+  PLAYER: '/player/:id',
+};
+export const FILMS = [
   {
     movieTitle: 'Fantastic Beasts: The Crimes of Grindelwald',
     src: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
@@ -84,13 +92,13 @@ const FILMS = [
     src: 'img/midnight-special.jpg',
   },
 ];
-const HEADER = {
-  filmTitle: 'The Grand Budapest Hotel',
-  style: 'Drama',
-  date: '2014',
+export const Header = {
+  FILMTITLE: 'The Grand Budapest Hotel',
+  STYLE: 'Drama',
+  DATE: '2014',
 };
 
 ReactDOM.render(
-  <App films={FILMS} header={HEADER}/>,
+  <App />,
   document.getElementById('root'),
 );
