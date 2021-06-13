@@ -1,14 +1,17 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
-import Film from '../movieCard/movieCard.jsx';
-import {FILMS, Header} from '../../index.js';
+import MovieCard from '../movie-card/movie-card.jsx';
+import {mainPropTypes} from './main-prop-types.jsx';
 
-function Main() {
+function Main({films, headFilm}) {
+  // По заданию нужно создать хук. но он пока не используется
+  // eslint-disable-next-line no-unused-vars
+  const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
     <Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={`img/bg-${films[headFilm].posterSrc}.jpg`} alt="The Grand Budapest Hotel" />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -26,20 +29,20 @@ function Main() {
               </div>
             </li>
             <li className="user-block__item">
-              <Link to="#" className="user-block__link">Sign out</Link>
+              <Link to="/login" className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={`img/${films[headFilm].posterSrc}-poster.jpg`} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{Header.FILMTITLE}</h2>
+              <h2 className="film-card__title">{films[headFilm].filmTitle}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{Header.STYLE}</span>
-                <span className="film-card__year">{Header.DATE}</span>
+                <span className="film-card__genre">{films[headFilm].style}</span>
+                <span className="film-card__year">{films[headFilm].date}</span>
               </p>
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
@@ -95,7 +98,7 @@ function Main() {
             </li>
           </ul>
           <div className="catalog__films-list">
-            {FILMS.map((film) => <Film key={film.movieTitle} movieTitle={film.movieTitle} src={film.src} />)}
+            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} setSelectedMovie={setSelectedMovie} />)}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -117,5 +120,7 @@ function Main() {
     </Fragment>
   );
 }
+
+Main.propTypes = mainPropTypes;
 
 export default Main;

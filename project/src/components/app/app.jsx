@@ -1,36 +1,30 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from '../main/main.jsx';
-import SignIn from '../signIn/signIn.jsx';
-import MyList from '../myList/myList.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
+import MyList from '../my-list/my-list.jsx';
 import Film from '../film/film.jsx';
-import AddReview from '../addReview/addReview.jsx';
+import AddReview from '../add-review/add-review.jsx';
 import Player from '../player/player.jsx';
-import NotFound from '../notFound/notFound.jsx';
-import {RoutePath} from '../../index.js';
+import NotFound from '../not-found/not-found.jsx';
+import {appPropTypes} from './app-prop-types.jsx';
 
-function App() {
+function App({routePath, films, headFilm, myFilms, ratingScale}) {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={RoutePath.MAIN} exact>
-          <Main />
+        <Route path={routePath.main} exact>
+          <Main films={films} headFilm={headFilm} />
         </Route>
-        <Route path={RoutePath.SIGNIN} exact>
+        <Route path={routePath.signIn} exact>
           <SignIn />
         </Route>
-        <Route path={RoutePath.MYLIST} exact>
-          <MyList />
+        <Route path={routePath.myList} exact>
+          <MyList films={films} myFilms={myFilms} />
         </Route>
-        <Route path={RoutePath.FILM} exact>
-          <Film />
-        </Route>
-        <Route path={RoutePath.ADDREVIEW} exact>
-          <AddReview />
-        </Route>
-        <Route path={RoutePath.PLAYER} exact>
-          <Player />
-        </Route>
+        <Route path={routePath.film} exact render={(props) => <Film {...props} films={films} ratingScale={ratingScale} />} />
+        <Route path={routePath.addReview} exact render={(props) => <AddReview {...props} films={films} />} />
+        <Route path={routePath.player} exact render={(props) => <Player {...props} films={films} />} />
         <Route>
           <NotFound />
         </Route>
@@ -38,5 +32,7 @@ function App() {
     </BrowserRouter>
   );
 }
+
+App.propTypes = appPropTypes;
 
 export default App;

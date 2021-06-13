@@ -1,6 +1,7 @@
 import React from 'react';
+import {playerPropTypes} from './player-prop-types.jsx';
 
-function Player() {
+function Player({films, history, location, match}) {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -8,10 +9,10 @@ function Player() {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: 0.3}}>Toggler</div>
+            <progress className="player__progress" value="0" max="100"></progress>
+            <div className="player__toggler" style={{left: '0%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{films[match.params.id].duration}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play">
@@ -32,5 +33,7 @@ function Player() {
     </div>
   );
 }
+
+Player.propTypes = playerPropTypes;
 
 export default Player;
