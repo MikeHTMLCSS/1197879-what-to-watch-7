@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 
 export const movieCardPropTypes = {
-  i: PropTypes.number,
+  i: PropTypes.number.isRequired,
   movieTitle: PropTypes.string.isRequired,
   posterSrc: PropTypes.string.isRequired,
-  setSelectedMovie: PropTypes.func,
+  movieCardTime: PropTypes.bool.isRequired,
+  selectedMovie: PropTypes.number.isRequired,
+  setSelectedMovie: PropTypes.func.isRequired,
 };

@@ -1,1 +1,1 @@
-export const MYFILMS = [1, 4, 5, 7];
+export const MY_FILMS = [1, 4, 5, 7];

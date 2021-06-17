@@ -4,9 +4,11 @@ import {filmPropTypes} from './film-prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 
 function Film({films, ratingScale, history, location, match}) {
-  // По заданию нужно создать хук. но он пока не используется
-  // eslint-disable-next-line no-unused-vars
   const [selectedMovie, setSelectedMovie] = useState(-1);
+  const [movieCardTime, setMovieCardTime] = useState(false);
+  setTimeout(() => {
+    setMovieCardTime(true);
+  }, 1000);
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -108,7 +110,7 @@ function Film({films, ratingScale, history, location, match}) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {films.map((film, i) => ((films[match.params.id].likeThis.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} setSelectedMovie={setSelectedMovie} />))}
+            {films.map((film, i) => ((films[match.params.id].likeThis.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} movieCardTime={movieCardTime} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />))}
           </div>
         </section>
         <footer className="page-footer">

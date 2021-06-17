@@ -1,12 +1,16 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
+import Genre from '../genre/genre.jsx';
 import MovieCard from '../movie-card/movie-card.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
+import {GENRES} from '../../consts.js';
 
 function Main({films, headFilm}) {
-  // По заданию нужно создать хук. но он пока не используется
-  // eslint-disable-next-line no-unused-vars
   const [selectedMovie, setSelectedMovie] = useState(-1);
+  const [movieCardTime, setMovieCardTime] = useState(false);
+  setTimeout(() => {
+    setMovieCardTime(true);
+  }, 1000);
   return (
     <Fragment>
       <section className="film-card">
@@ -66,39 +70,10 @@ function Main({films, headFilm}) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <Link to="#" className="catalog__genres-link">All genres</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Comedies</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Crime</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Documentary</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Dramas</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Horror</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Kids &amp; Family</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Romance</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Sci-Fi</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Thrillers</Link>
-            </li>
+            {GENRES.map((genre) => <Genre key={genre} genre={genre} />)}
           </ul>
           <div className="catalog__films-list">
-            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} setSelectedMovie={setSelectedMovie} />)}
+            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} movieCardTime={movieCardTime} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

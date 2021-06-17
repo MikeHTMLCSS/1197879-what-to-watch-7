@@ -1,4 +1,4 @@
-export const ROUTEPATH = {
+export const ROUTE_PATH = {
   main: '/',
   signIn: '/login',
   myList: '/mylist',
@@ -6,7 +6,7 @@ export const ROUTEPATH = {
   addReview: '/films/:id/review',
   player: '/player/:id',
 };
-export const RATINGSCALE = [
+export const RATING_SCALE = [
   {
     type: 'Bad',
     value: 1,
@@ -28,3 +28,4 @@ export const RATINGSCALE = [
     value: 10,
   },
 ];
+export const GENRES = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
