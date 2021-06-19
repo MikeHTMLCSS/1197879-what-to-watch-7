@@ -5,10 +5,6 @@ import MovieCard from '../movie-card/movie-card.jsx';
 
 function MyList({films, myFilms}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
-  const [movieCardTime, setMovieCardTime] = useState(false);
-  setTimeout(() => {
-    setMovieCardTime(true);
-  }, 1000);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -34,7 +30,7 @@ function MyList({films, myFilms}) {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          {films.map((film, i) => ((myFilms.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} movieCardTime={movieCardTime} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />))}
+          {films.map((film, i) => ((myFilms.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />))}
         </div>
       </section>
       <footer className="page-footer">

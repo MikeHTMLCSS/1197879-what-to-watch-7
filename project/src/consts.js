@@ -29,3 +29,4 @@ export const RATING_SCALE = [
   },
 ];
 export const GENRES = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
+export const MOVIE_CARD_TIME = 1000;

@@ -7,10 +7,6 @@ import {GENRES} from '../../consts.js';
 
 function Main({films, headFilm}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
-  const [movieCardTime, setMovieCardTime] = useState(false);
-  setTimeout(() => {
-    setMovieCardTime(true);
-  }, 1000);
   return (
     <Fragment>
       <section className="film-card">
@@ -73,7 +69,7 @@ function Main({films, headFilm}) {
             {GENRES.map((genre) => <Genre key={genre} genre={genre} />)}
           </ul>
           <div className="catalog__films-list">
-            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} movieCardTime={movieCardTime} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
+            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
