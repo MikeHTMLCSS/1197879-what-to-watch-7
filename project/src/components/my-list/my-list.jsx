@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {myListPropTypes} from './my-list-prop-types';
-import MovieCard from '../movie-card/movie-card.jsx';
+import MovieList from '../movie-list/movie-list.jsx';
 
 function MyList({films, myFilms}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
@@ -30,7 +30,7 @@ function MyList({films, myFilms}) {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          {films.map((film, i) => ((myFilms.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />))}
+          <MovieList films={films} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} filmNumbers={myFilms} />
         </div>
       </section>
       <footer className="page-footer">

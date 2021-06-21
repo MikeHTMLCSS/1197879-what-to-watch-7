@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export const appPropTypes = {
-  routePath: PropTypes.objectOf(PropTypes.string).isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     posterSrc: PropTypes.string,
     movieTitle: PropTypes.string,
@@ -17,8 +16,4 @@ export const appPropTypes = {
   })).isRequired,
   headFilm: PropTypes.number.isRequired,
   myFilms: PropTypes.arrayOf(PropTypes.number).isRequired,
-  ratingScale: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string,
-    value: PropTypes.number,
-  })).isRequired,
 };

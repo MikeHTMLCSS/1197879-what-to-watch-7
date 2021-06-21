@@ -1,9 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
-import Genre from '../genre/genre.jsx';
-import MovieCard from '../movie-card/movie-card.jsx';
+import GenreList from '../genre-list/genre-list.jsx';
+import MovieList from '../movie-list/movie-list.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
-import {GENRES} from '../../consts.js';
 
 function Main({films, headFilm}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
@@ -66,10 +65,10 @@ function Main({films, headFilm}) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            {GENRES.map((genre) => <Genre key={genre} genre={genre} />)}
+            <GenreList />
           </ul>
           <div className="catalog__films-list">
-            {films.map((film, i) => <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
+            <MovieList films={films} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

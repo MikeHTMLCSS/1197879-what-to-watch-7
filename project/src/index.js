@@ -1,13 +1,23 @@
+import {createStore} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {Provider} from 'react-redux';
+import {reducer} from './store/reducer.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import {ROUTE_PATH, RATING_SCALE} from './consts.js';
 
 import {FILMS} from './mocks/films.js';
 import {HEAD_FILM} from './mocks/headfilm.js';
 import {MY_FILMS} from './mocks/myfilms.js';
 
+const store = createStore(
+  reducer,
+  composeWithDevTools(),
+);
+
 ReactDOM.render(
-  <App routePath={ROUTE_PATH} films={FILMS} headFilm={HEAD_FILM} myFilms={MY_FILMS} ratingScale={RATING_SCALE} />,
+  <Provider store={store}>
+    <App films={FILMS} headFilm={HEAD_FILM} myFilms={MY_FILMS} />
+  </Provider>,
   document.getElementById('root'),
 );

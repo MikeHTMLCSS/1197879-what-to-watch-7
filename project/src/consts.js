@@ -1,10 +1,10 @@
-export const ROUTE_PATH = {
-  main: '/',
-  signIn: '/login',
-  myList: '/mylist',
-  film: '/films/:id',
-  addReview: '/films/:id/review',
-  player: '/player/:id',
+export const RoutePath = {
+  MAIN: '/',
+  SIGN_IN: '/login',
+  MY_LIST: '/mylist',
+  FILM: '/films/:id',
+  ADD_REVIEW: '/films/:id/review',
+  PLAYER: '/player/:id',
 };
 export const RATING_SCALE = [
   {
@@ -28,5 +28,8 @@ export const RATING_SCALE = [
     value: 10,
   },
 ];
-export const GENRES = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
+export const Genres = {
+  ALL_GENRES: 'All genres',
+  GENRES: ['Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'],
+};
 export const MOVIE_CARD_TIME = 1000;

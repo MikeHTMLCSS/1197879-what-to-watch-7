@@ -14,7 +14,7 @@ export const FILMS = [
   },
   {
     posterSrc: 'bohemian-rhapsody',
-    style: 'Documentary',
+    style: 'Drama',
     date: '2011',
     movieTitle: 'Bohemian Rhapsody',
     duration: '1:23:51',

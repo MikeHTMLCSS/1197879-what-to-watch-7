@@ -1,9 +1,10 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {filmPropTypes} from './film-prop-types';
-import MovieCard from '../movie-card/movie-card.jsx';
+import MovieList from '../movie-list/movie-list.jsx';
+import {RATING_SCALE} from '../../consts.js';
 
-function Film({films, ratingScale, history, location, match}) {
+function Film({films, history, location, match}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
     <Fragment>
@@ -82,7 +83,7 @@ function Film({films, ratingScale, history, location, match}) {
                   <span className="film-rating__level">
                     {(() => {
                       let ratingType = '';
-                      ratingScale.forEach((ratingLevel) => {
+                      RATING_SCALE.forEach((ratingLevel) => {
                         if (ratingLevel.value <= films[match.params.id].rating) {
                           ratingType = ratingLevel.type;
                         }
@@ -106,7 +107,7 @@ function Film({films, ratingScale, history, location, match}) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {films.map((film, i) => ((films[match.params.id].likeThis.indexOf(i) !== -1) && <MovieCard key={film.movieTitle} i={i} movieTitle={film.movieTitle} posterSrc={film.posterSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />))}
+            <MovieList films={films} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} filmNumbers={films[match.params.id].likeThis} />
           </div>
         </section>
         <footer className="page-footer">
