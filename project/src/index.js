@@ -1,23 +1,27 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {Provider} from 'react-redux';
+import {createAPI} from './services/api.js';
 import {reducer} from './store/reducer.js';
+import {Provider} from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-import {FILMS} from './mocks/films.js';
-import {HEAD_FILM} from './mocks/headfilm.js';
-import {MY_FILMS} from './mocks/myfilms.js';
+let store = null;
 
-const store = createStore(
+const api = createAPI(() => store);
+
+store = createStore(
   reducer,
-  composeWithDevTools(),
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api)),
+  ),
 );
 
 ReactDOM.render(
   <Provider store={store}>
-    <App films={FILMS} headFilm={HEAD_FILM} myFilms={MY_FILMS} />
+    <App />
   </Provider>,
   document.getElementById('root'),
 );

@@ -1,3 +1,16 @@
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NOT_AUTH: 'NOT_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+export const APIRoute = {
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  FILMS: '/films',
+  PROMO: '/promo',
+  FAVORITE: '/favorite',
+  SIMILAR: '/similar',
+};
 export const RoutePath = {
   MAIN: '/',
   SIGN_IN: '/login',

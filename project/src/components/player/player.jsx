@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {playerPropTypes} from './player-prop-types.jsx';
 
 function Player({films, history, location, match}) {
@@ -36,4 +37,10 @@ function Player({films, history, location, match}) {
 
 Player.propTypes = playerPropTypes;
 
-export default Player;
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {Player};
+
+export default connect(mapStateToProps)(Player);

@@ -1,5 +1,4 @@
-import React, {Fragment} from 'react';
-import {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 
 function ReviewForm() {
   const [formData, setFormData] = useState({

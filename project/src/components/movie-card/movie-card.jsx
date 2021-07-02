@@ -4,11 +4,11 @@ import {movieCardPropTypes} from './movie-card-prop-types.jsx';
 import MovieCardVideo from '../movie-card-video/movie-card-video.jsx';
 import {MOVIE_CARD_TIME} from '../../consts.js';
 
-function MovieCard({i, movieTitle, posterSrc, selectedMovie, setSelectedMovie}) {
+function MovieCard({id, title, previewSrc, previewVideoSrc, selectedMovie, setSelectedMovie}) {
   const [isLaunched, setIsLaunched] = useState(false);
   useEffect(() => {
     let cardTimer;
-    if (i === selectedMovie) {
+    if (id === selectedMovie) {
       cardTimer = setTimeout(() => {
         setIsLaunched(true);
       }, MOVIE_CARD_TIME);
@@ -16,15 +16,15 @@ function MovieCard({i, movieTitle, posterSrc, selectedMovie, setSelectedMovie}) 
       setIsLaunched(false);
     }
     return () => clearTimeout(cardTimer);
-  }, [i, selectedMovie]);
+  }, [id, selectedMovie]);
   return (
-    <article className="small-film-card catalog__films-card" onMouseOver={() => {setSelectedMovie(i);}} onMouseLeave={() => {setSelectedMovie(-1);}} >
-      <Link className="small-film-card__link" to={`/films/${i}`}>
+    <article className="small-film-card catalog__films-card" onMouseOver={() => {setSelectedMovie(id);}} onMouseLeave={() => {setSelectedMovie(-1);}} >
+      <Link className="small-film-card__link" to={`/films/${id}`}>
         <div className="small-film-card__image">
-          <MovieCardVideo posterSrc={posterSrc} isLaunched={isLaunched} />
+          <MovieCardVideo previewVideoSrc={previewVideoSrc} previewSrc={previewSrc} isLaunched={isLaunched} />
         </div>
       </Link>
-      <h3 className="small-film-card__title"><Link className="small-film-card__link" to={`/films/${i}`}>{movieTitle}</Link></h3>
+      <h3 className="small-film-card__title"><Link className="small-film-card__link" to={`/films/${id}`}>{title}</Link></h3>
     </article>
   );
 }

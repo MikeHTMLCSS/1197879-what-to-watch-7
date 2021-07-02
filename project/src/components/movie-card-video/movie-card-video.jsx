@@ -1,18 +1,18 @@
 import React, {useRef, useEffect} from 'react';
 import {movieCardVideoPropTypes} from './movie-card-video-prop-types';
 
-function MovieCardVideo({posterSrc, isLaunched}) {
+function MovieCardVideo({previewVideoSrc, previewSrc, isLaunched}) {
   const videoElement = useRef(null);
   useEffect(() => {
     if (isLaunched) {
-      videoElement.current.src = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
+      videoElement.current.src = previewVideoSrc;
       videoElement.current.play();
     } else {
       videoElement.current.src = null;
     }
-  }, [isLaunched]);
+  }, [previewVideoSrc, isLaunched]);
   return (
-    <video ref={videoElement} muted className="small-film-card__image" poster={`img/${posterSrc}.jpg`}></video>
+    <video ref={videoElement} muted className="small-film-card__image" poster={previewSrc}></video>
   );
 }
 
