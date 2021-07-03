@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginFormPropTypes} from './login-form-prop-types.jsx';
-import {login} from '../../store/api-actions.js';
+import {login} from '../../services/api-actions.js';
+import {browserHistory} from '../../services/browser-history.js';
 
 function LoginForm({signIn}) {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ LoginForm.propTypes = loginFormPropTypes;
 
 const mapDispatchToProps = (dispatch) => ({
   signIn(formData) {
-    dispatch(login(formData));
+    dispatch(login(formData, () => browserHistory.push('/')));
   },
 });
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {headerPropTypes} from './header-prop-types.jsx';
 import {AuthorizationStatus} from '../../consts.js';
-import {logout} from '../../store/api-actions.js';
+import {logout} from '../../services/api-actions.js';
 
 function Header({title = null, modifierClass, authorizationStatus, logoff}) {
   return (

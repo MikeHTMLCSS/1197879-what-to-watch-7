@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {filmPropTypes} from './film-prop-types';
 import MovieList from '../movie-list/movie-list.jsx';
 import {RATING_SCALE} from '../../consts.js';
-import {fetchFilmsLikeThis} from '../../store/api-actions.js';
+import {fetchFilmsLikeThis} from '../../services/api-actions.js';
 
 function Film({films, filmsLikeThis, getFilmsLikeThis, history, location, match}) {
   useEffect(() => {

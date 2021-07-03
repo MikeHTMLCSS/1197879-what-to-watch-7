@@ -1,4 +1,4 @@
-import {ActionCreator} from './action.js';
+import {ActionCreator} from '../store/action.js';
 import {AuthorizationStatus, APIRoute} from '../consts.js';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -7,10 +7,11 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const login = ({email, password}) => (dispatch, _getState, api) => (
+export const login = ({email, password}, redirect) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => localStorage.setItem('token', data.token))
     .then(() => dispatch(ActionCreator.requireAutorization(AuthorizationStatus.AUTH)))
+    .then(() => redirect())
     .catch(() => {})
 );
 
