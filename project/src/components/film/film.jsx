@@ -7,10 +7,16 @@ import MovieList from '../movie-list/movie-list.jsx';
 import {RATING_SCALE} from '../../consts.js';
 import {fetchFilmsLikeThis} from '../../services/api-actions.js';
 
-function Film({films, filmsLikeThis, getFilmsLikeThis, history, location, match}) {
+function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
+  let id = null;
+  if (films) {
+    id = films[match.params.id].id;
+  }
   useEffect(() => {
-    getFilmsLikeThis(match.params.id);
-  }, [getFilmsLikeThis, match.params.id]);
+    if (films) {
+      getFilmsLikeThis(id);
+    }
+  }, [getFilmsLikeThis, films, id]);
   const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
     <Fragment>
@@ -101,11 +107,15 @@ function Film({films, filmsLikeThis, getFilmsLikeThis, history, location, match}
         </div>
       </section>
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-          {/*И это не работает. Типа совсем. То ли я неправильно пользуюсь коллекциями, то ли что. Я разберусь. Или мне вообще не следовало использовать для этого коллекцию? Короче я со временем починю, это же просто бизнес-логика, там всё довольно просто обычно*/}
-          {(films && filmsLikeThis.get(`${films[match.params.id].id}`)) && <MovieList films={filmsLikeThis.get(`${films[match.params.id].id}`)} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />}
-        </section>
+        {
+          films &&
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <div className="catalog__films-list">
+              {(likeThis.id === films[match.params.id].id) && <MovieList films={likeThis.films} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />}
+            </div>
+          </section>
+        }
         <footer className="page-footer">
           <div className="logo">
             <Link to="/" className="logo__link logo__link--light">
@@ -125,9 +135,9 @@ function Film({films, filmsLikeThis, getFilmsLikeThis, history, location, match}
 
 Film.propTypes = filmPropTypes;
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  filmsLikeThis: state.filmsLikeThis,
+const mapStateToProps = ({FILMS}) => ({
+  films: FILMS.films,
+  likeThis: FILMS.likeThis,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,18 +1,11 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
+import {useForm} from '../../hooks/use-form.js';
 
 function ReviewForm() {
-  const [formData, setFormData] = useState({
+  const [formData, handleChange] = useForm({
     rating: null,
     reviewText: '',
   });
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
   return (
     <form action="#" className="add-review__form">
       <div className="rating">

@@ -38,8 +38,8 @@ function MyList({myFilms, getMyFilmsList}) {
 
 MyList.propTypes = myListPropTypes;
 
-const mapStateToProps = (state) => ({
-  myFilms: state.myFilms,
+const mapStateToProps = ({FILMS}) => ({
+  myFilms: FILMS.myFilms,
 });
 
 const mapDispatchToProps = (dispatch) => ({

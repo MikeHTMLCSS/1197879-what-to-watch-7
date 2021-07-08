@@ -37,8 +37,8 @@ function Player({films, history, location, match}) {
 
 Player.propTypes = playerPropTypes;
 
-const mapStateToProps = (state) => ({
-  films: state.films,
+const mapStateToProps = ({FILMS}) => ({
+  films: FILMS.films,
 });
 
 export {Player};

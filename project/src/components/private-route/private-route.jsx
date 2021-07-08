@@ -12,8 +12,8 @@ function PrivateRoute({render, path, exact, authorizationStatus}) {
 
 PrivateRoute.propTypes = privateRoutePropTypes;
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
 });
 
 export {PrivateRoute};

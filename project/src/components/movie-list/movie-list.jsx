@@ -18,7 +18,7 @@ function MovieList({films, choosedGenre, isGenre = false, selectedMovie, setSele
     }
     return (
       <Fragment>
-        {movies.map((film, i) => <MovieCard key={film.title} id={i} title={film.title} previewSrc={film.previewSrc} previewVideoSrc={film.previewVideoSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
+        {movies.map((film) => <MovieCard key={film.title} id={film.id - 1} title={film.title} previewSrc={film.previewSrc} previewVideoSrc={film.previewVideoSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
       </Fragment>
     );
   }
@@ -27,8 +27,8 @@ function MovieList({films, choosedGenre, isGenre = false, selectedMovie, setSele
 
 MovieList.propTypes = MovieListPropTypes;
 
-const mapStateToProps = (state) => ({
-  choosedGenre: state.choosedGenre,
+const mapStateToProps = ({VIEW}) => ({
+  choosedGenre: VIEW.choosedGenre,
 });
 
 export {MovieList};

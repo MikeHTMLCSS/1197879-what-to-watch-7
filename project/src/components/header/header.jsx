@@ -45,8 +45,8 @@ function Header({title = null, modifierClass, authorizationStatus, logoff}) {
 
 Header.propTypes = headerPropTypes;
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

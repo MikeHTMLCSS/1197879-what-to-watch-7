@@ -1,22 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {loginFormPropTypes} from './login-form-prop-types.jsx';
 import {login} from '../../services/api-actions.js';
 import {browserHistory} from '../../services/browser-history.js';
+import {useForm} from '../../hooks/use-form.js';
 
 function LoginForm({signIn}) {
-  const [formData, setFormData] = useState({
+  const [formData, handleChange] = useForm({
     email: '',
     password: '',
   });
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
   return (
     <form action="#" className="sign-in__form" onSubmit={(event) => {
       event.preventDefault();

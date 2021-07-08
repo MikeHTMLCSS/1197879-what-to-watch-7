@@ -87,9 +87,9 @@ function Main({films, promoFilm, getPromoFilm}) {
 
 Main.propTypes = mainPropTypes;
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  promoFilm: state.promoFilm,
+const mapStateToProps = ({FILMS}) => ({
+  films: FILMS.films,
+  promoFilm: FILMS.promoFilm,
 });
 
 const mapDispatchToProps = (dispatch) => ({

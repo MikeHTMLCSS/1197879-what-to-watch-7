@@ -1,7 +1,8 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
-  REQUIRE_AUTORIZATION: 'user/requireAutorization',
-  LOGIN: 'user/login',
-  LOGOUT: 'user/logout',
+  SIGN_IN: 'user/signIn',
+  LOGOFF: 'user/logoff',
   GET_FILMS_LIST: 'data/getFilmsList',
   GET_PROMO_FILM: 'data/getPromoFilm',
   GET_MY_FILMS_LIST: 'data/getMyFilmsList',
@@ -9,36 +10,29 @@ export const ActionType = {
   CHOOSE_GENRE: 'filmsLlist/chooseGenre',
 };
 
-export const ActionCreator = {
-  requireAutorization: (status) => ({
-    type: ActionType.REQUIRE_AUTORIZATION,
-    status: status,
-  }),
-  login: () => ({
-    type: ActionType.LOGIN,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  getFilmsList: (films) => ({
-    type: ActionType.GET_FILMS_LIST,
-    films: films,
-  }),
-  getPromoFilm: (promoFilm) => ({
-    type: ActionType.GET_PROMO_FILM,
-    promoFilm: promoFilm,
-  }),
-  chooseGenre: (genre) => ({
-    type: ActionType.CHOOSE_GENRE,
-    genre: genre,
-  }),
-  getMyFilmsList: (myFilms) => ({
-    type: ActionType.GET_MY_FILMS_LIST,
-    myFilms: myFilms,
-  }),
-  getFilmsLikeThis: (filmsLikeThis, id) => ({
-    type: ActionType.GET_FILMS_LIKE_THIS,
+export const signIn = createAction(ActionType.SIGN_IN);
+
+export const logoff = createAction(ActionType.LOGOFF);
+
+export const getFilmsList = createAction(ActionType.GET_FILMS_LIST, (films) => ({
+  payload: films,
+}));
+
+export const getPromoFilm = createAction(ActionType.GET_PROMO_FILM, (promoFilm) => ({
+  payload: promoFilm,
+}));
+
+export const chooseGenre = createAction(ActionType.CHOOSE_GENRE, (genre) => ({
+  payload: genre,
+}));
+
+export const getMyFilmsList = createAction(ActionType.GET_MY_FILMS_LIST, (myFilms) => ({
+  payload: myFilms,
+}));
+
+export const getFilmsLikeThis = createAction(ActionType.GET_FILMS_LIKE_THIS, (filmsLikeThis, id) => ({
+  payload: {
     filmsLikeThis: filmsLikeThis,
     id: id,
-  }),
-};
+  },
+}));

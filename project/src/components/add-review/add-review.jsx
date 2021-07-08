@@ -57,8 +57,8 @@ function AddReview({films, history, location, match}) {
 
 AddReview.propTypes = addReviewPropTypes;
 
-const mapStateToProps = (state) => ({
-  films: state.films,
+const mapStateToProps = ({FILMS}) => ({
+  films: FILMS.films,
 });
 
 export {AddReview};
