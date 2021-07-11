@@ -1,4 +1,4 @@
-import {chooseGenre} from '../action/action';
+import {chooseGenre} from '../../action/action';
 import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {

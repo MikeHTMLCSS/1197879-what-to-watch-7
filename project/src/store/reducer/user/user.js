@@ -1,5 +1,5 @@
-import {signIn, logoff} from '../action/action.js';
-import {AuthorizationStatus} from '../../consts.js';
+import {signIn, logoff} from '../../action/action.js';
+import {AuthorizationStatus} from '../../../consts.js';
 import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {

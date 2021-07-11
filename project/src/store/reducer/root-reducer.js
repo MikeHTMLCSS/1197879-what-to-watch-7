@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {user} from './user.js';
-import {films} from './films.js';
-import {view} from './view.js';
+import {user} from './user/user.js';
+import {films} from './films/films.js';
+import {view} from './view/view.js';
 
 export const NameSpace = {
   USER: 'USER',
