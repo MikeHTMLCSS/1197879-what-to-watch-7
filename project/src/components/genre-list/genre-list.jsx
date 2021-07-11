@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import Genre from '../genre/genre.jsx';
 import {Genres} from '../../consts.js';
-import {chooseGenre} from '../../store/action.js';
+import {chooseGenre} from '../../store/action/action.js';
 import {genreListPropTypes} from './genre-list-prop-types.jsx';
 
 function GenreList({changeGenre}) {

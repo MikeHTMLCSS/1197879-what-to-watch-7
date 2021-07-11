@@ -1,4 +1,4 @@
-import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../store/action.js';
+import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../store/action/action.js';
 import {APIRoute} from '../consts.js';
 
 export const checkAuth = () => (dispatch, _getState, api) => (

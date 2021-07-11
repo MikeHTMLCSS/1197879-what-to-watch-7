@@ -1,4 +1,4 @@
-import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../action.js';
+import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../action/action.js';
 import {adaptFilm} from '../adapter.js';
 import {createReducer} from '@reduxjs/toolkit';
 
