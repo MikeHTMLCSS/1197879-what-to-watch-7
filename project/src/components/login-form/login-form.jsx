@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {loginFormPropTypes} from './login-form-prop-types.jsx';
-import {login} from '../../services/api-actions.js';
+import {login} from '../../services/api-actions/api-actions.js';
 import {browserHistory} from '../../services/browser-history.js';
 import {useForm} from '../../hooks/use-form.js';
 

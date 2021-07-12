@@ -12,7 +12,7 @@ import AddReview from '../add-review/add-review.jsx';
 import Player from '../player/player.jsx';
 import NotFound from '../not-found/not-found.jsx';
 import {appPropTypes} from './app-prop-types.jsx';
-import {checkAuth, fetchFilmsList} from '../../services/api-actions.js';
+import {checkAuth, fetchFilmsList} from '../../services/api-actions/api-actions.js';
 
 function App({checkAuthorization, getFilmsList}) {
   useEffect(() => {

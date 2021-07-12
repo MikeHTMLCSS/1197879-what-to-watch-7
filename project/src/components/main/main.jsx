@@ -5,7 +5,7 @@ import Header from '../header/header.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
-import {fetchPromoFilm} from '../../services/api-actions.js';
+import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
 
 function Main({films, promoFilm, getPromoFilm}) {
   useEffect(() => {

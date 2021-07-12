@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {myListPropTypes} from './my-list-prop-types';
 import Header from '../header/header.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
-import {fetchMyFilmsList} from '../../services/api-actions.js';
+import {fetchMyFilmsList} from '../../services/api-actions/api-actions.js';
 
 function MyList({myFilms, getMyFilmsList}) {
   useEffect(() => {
