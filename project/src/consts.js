@@ -46,3 +46,8 @@ export const Genres = {
   GENRES: ['Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'],
 };
 export const MOVIE_CARD_TIME = 1000;
+export const FilmPages = {
+  OVERVIEW: 'overview',
+  DETAILS: 'details',
+  REVIEWS: 'reviews',
+};

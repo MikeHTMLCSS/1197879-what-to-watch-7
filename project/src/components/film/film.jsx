@@ -3,8 +3,11 @@ import {Link} from 'react-router-dom';
 import Header from '../header/header.jsx';
 import {connect} from 'react-redux';
 import {filmPropTypes} from './film-prop-types';
+import Overview from '../overview/overview.jsx';
+import Details from '../delails/details.jsx';
+import Reviews from '../reviews/reviews.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
-import {RATING_SCALE} from '../../consts.js';
+import {FilmPages} from '../../consts.js';
 import {fetchFilmsLikeThis} from '../../services/api-actions/api-actions.js';
 
 function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
@@ -17,6 +20,7 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
       getFilmsLikeThis(id);
     }
   }, [getFilmsLikeThis, films, id]);
+  const [selectedPage, setSelectedPage] = useState(FilmPages.OVERVIEW);
   const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
     <Fragment>
@@ -68,39 +72,20 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
               <div className="film-card__desc">
                 <nav className="film-nav film-card__nav">
                   <ul className="film-nav__list">
-                    <li className="film-nav__item film-nav__item--active">
-                      <Link to="#" className="film-nav__link">Overview</Link>
+                    <li className={`film-nav__item${(selectedPage === FilmPages.OVERVIEW) ? ' film-nav__item--active' : ''}`}>
+                      <Link to="#" className="film-nav__link" onClick={() => setSelectedPage(FilmPages.OVERVIEW)}>Overview</Link>
                     </li>
-                    <li className="film-nav__item">
-                      <Link to="#" className="film-nav__link">Details</Link>
+                    <li className={`film-nav__item${(selectedPage === FilmPages.DETAILS) ? ' film-nav__item--active' : ''}`}>
+                      <Link to="#" className="film-nav__link" onClick={() => setSelectedPage(FilmPages.DETAILS)}>Details</Link>
                     </li>
-                    <li className="film-nav__item">
-                      <Link to="#" className="film-nav__link">Reviews</Link>
+                    <li className={`film-nav__item${(selectedPage === FilmPages.REVIEWS) ? ' film-nav__item--active' : ''}`}>
+                      <Link to="#" className="film-nav__link" onClick={() => setSelectedPage(FilmPages.REVIEWS)}>Reviews</Link>
                     </li>
                   </ul>
                 </nav>
-                <div className="film-rating">
-                  <div className="film-rating__score">{films[match.params.id].rating}</div>
-                  <p className="film-rating__meta">
-                    <span className="film-rating__level">
-                      {(() => {
-                        let ratingType = '';
-                        RATING_SCALE.forEach((ratingLevel) => {
-                          if (ratingLevel.value <= films[match.params.id].rating) {
-                            ratingType = ratingLevel.type;
-                          }
-                        });
-                        return ratingType;
-                      })()}
-                    </span>
-                    <span className="film-rating__count">{films[match.params.id].scores_count} ratings</span>
-                  </p>
-                </div>
-                <div className="film-card__text">
-                  <p>{films[match.params.id].description}</p>
-                  <p className="film-card__director"><strong>Director: {films[match.params.id].director}</strong></p>
-                  <p className="film-card__starring"><strong>Starring: {films[match.params.id].stars.map((role) => `${role}, `)}</strong></p>
-                </div>
+                {selectedPage === FilmPages.OVERVIEW && <Overview film={films[match.params.id]} />}
+                {selectedPage === FilmPages.DETAILS && <Details film={films[match.params.id]} />}
+                {selectedPage === FilmPages.REVIEWS && <Reviews film={films[match.params.id]} />}
               </div>
             </div>
           }

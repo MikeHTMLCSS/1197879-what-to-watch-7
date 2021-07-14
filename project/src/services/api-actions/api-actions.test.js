@@ -45,9 +45,9 @@ describe('Asynchronous operations', () => {
       .onGet(APIRoute.FILMS)
       .reply(200, [{testData: 1}]);
     return checkAuthAction(dispatch, () => {}, api)
-      .then(({data}) => {
+      .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith(getFilmsList(data));
+        expect(dispatch).toHaveBeenCalledWith(getFilmsList([{testData: 1}]));
       });
   });
 });
