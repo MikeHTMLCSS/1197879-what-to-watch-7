@@ -6,12 +6,14 @@ import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
 import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
+import {SHOW_FILMS_NUMBER} from '../../consts.js';
 
 function Main({films, promoFilm, getPromoFilm}) {
   useEffect(() => {
     getPromoFilm();
   }, [getPromoFilm]);
   const [selectedMovie, setSelectedMovie] = useState(-1);
+  const [showedFilmsNumber, setShowedFilmsNumber] = useState(SHOW_FILMS_NUMBER);
   return (
     <Fragment>
       <section className="film-card">
@@ -62,10 +64,10 @@ function Main({films, promoFilm, getPromoFilm}) {
             <GenreList />
           </ul>
           <div className="catalog__films-list">
-            <MovieList films={films} isGenre selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
+            <MovieList films={films} showedFilmsNumber={showedFilmsNumber} isGenre selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
           </div>
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            <button className="catalog__button" type="button" onClick={() => setShowedFilmsNumber(showedFilmsNumber + SHOW_FILMS_NUMBER)}>Show more</button>
           </div>
         </section>
         <footer className="page-footer">

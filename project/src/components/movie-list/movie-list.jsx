@@ -4,7 +4,7 @@ import MovieCard from '../movie-card/movie-card';
 import Loading from '../loading/loading.jsx';
 import {MovieListPropTypes} from '../movie-list/movie-list-prop-types';
 
-function MovieList({films, choosedGenre, isGenre = false, selectedMovie, setSelectedMovie}) {
+function MovieList({films, showedFilmsNumber = false, choosedGenre, isGenre = false, selectedMovie, setSelectedMovie}) {
   if (films) {
     let movies = [];
     if (choosedGenre && isGenre) {
@@ -16,9 +16,17 @@ function MovieList({films, choosedGenre, isGenre = false, selectedMovie, setSele
     } else {
       movies = films;
     }
+    let filmsNumber = films.length;
+    if (showedFilmsNumber) {
+      if (showedFilmsNumber < films.length) {
+        filmsNumber = showedFilmsNumber;
+      } else {
+        filmsNumber = films.length;
+      }
+    }
     return (
       <Fragment>
-        {movies.map((film) => <MovieCard key={film.title} id={film.id - 1} title={film.title} previewSrc={film.previewSrc} previewVideoSrc={film.previewVideoSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
+        {movies.slice(0, filmsNumber).map((film) => <MovieCard key={film.title} id={film.id - 1} title={film.title} previewSrc={film.previewSrc} previewVideoSrc={film.previewVideoSrc} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />)}
       </Fragment>
     );
   }

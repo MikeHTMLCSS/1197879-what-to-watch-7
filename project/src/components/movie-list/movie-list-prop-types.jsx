@@ -20,6 +20,7 @@ export const MovieListPropTypes = {
     released: PropTypes.number,
     isFavorite: PropTypes.bool,
   })), PropTypes.bool]).isRequired,
+  showedFilmsNumber: PropTypes.number,
   choosedGenre: PropTypes.any.isRequired,
   isGenre: PropTypes.bool,
   selectedMovie: PropTypes.number.isRequired,

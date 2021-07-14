@@ -51,3 +51,4 @@ export const FilmPages = {
   DETAILS: 'details',
   REVIEWS: 'reviews',
 };
+export const SHOW_FILMS_NUMBER = 8;
