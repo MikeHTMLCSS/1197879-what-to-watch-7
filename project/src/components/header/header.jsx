@@ -5,7 +5,7 @@ import {headerPropTypes} from './header-prop-types.jsx';
 import {AuthorizationStatus} from '../../consts.js';
 import {logout} from '../../services/api-actions/api-actions.js';
 
-function Header({title = null, modifierClass, authorizationStatus, logoff}) {
+function Header({children, modifierClass, authorizationStatus, logoff}) {
   return (
     authorizationStatus === AuthorizationStatus.AUTH ?
       <header className={`page-header ${modifierClass}`} >
@@ -16,7 +16,7 @@ function Header({title = null, modifierClass, authorizationStatus, logoff}) {
             <span className="logo__letter logo__letter--3">W</span>
           </Link>
         </div>
-        {title && <h1 className="page-title user-page__title">{title}</h1>}
+        {children}
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">

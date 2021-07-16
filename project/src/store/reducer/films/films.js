@@ -1,4 +1,4 @@
-import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../../action/action.js';
+import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments} from '../../action/action.js';
 import {adaptFilm} from '../../adapter.js';
 import {createReducer} from '@reduxjs/toolkit';
 
@@ -8,6 +8,10 @@ const initialState = {
   myFilms: false,
   likeThis: {
     films: false,
+    id: -1,
+  },
+  reply: {
+    comments: false,
     id: -1,
   },
 };
@@ -26,6 +30,12 @@ export const films = createReducer(initialState, (builder) => {
     .addCase(getFilmsLikeThis, (state, action) => {
       state.likeThis = {
         films: action.payload.filmsLikeThis.map((filmLikeThis) => adaptFilm(filmLikeThis)),
+        id: action.payload.id,
+      };
+    })
+    .addCase(getComments, (state, action) => {
+      state.reply = {
+        comments: action.payload.comments,
         id: action.payload.id,
       };
     });

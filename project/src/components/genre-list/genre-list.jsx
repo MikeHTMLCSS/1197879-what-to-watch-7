@@ -17,7 +17,7 @@ function GenreList({changeGenre}) {
 GenreList.propTypes = genreListPropTypes;
 
 const mapDispatchToProps = (dispatch) => ({
-  chooseGenre(genre) {
+  changeGenre(genre) {
     dispatch(chooseGenre(genre));
   },
 });

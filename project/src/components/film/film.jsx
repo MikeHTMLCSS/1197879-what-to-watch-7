@@ -7,10 +7,11 @@ import Overview from '../overview/overview.jsx';
 import Details from '../delails/details.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
-import {FilmPages} from '../../consts.js';
-import {fetchFilmsLikeThis} from '../../services/api-actions/api-actions.js';
+import {FilmPages ,AuthorizationStatus} from '../../consts.js';
+import {fetchFilmsLikeThis, fetchComments} from '../../services/api-actions/api-actions.js';
+import {browserHistory} from '../../services/browser-history.js';
 
-function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
+function Film({authorizationStatus, films, likeThis, reply, getFilmsLikeThis, getComments, match}) {
   let id = null;
   if (films) {
     id = films[match.params.id].id;
@@ -20,6 +21,11 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
       getFilmsLikeThis(id);
     }
   }, [getFilmsLikeThis, films, id]);
+  useEffect(() => {
+    if (films) {
+      getComments(id);
+    }
+  }, [getComments, films, id]);
   const [selectedPage, setSelectedPage] = useState(FilmPages.OVERVIEW);
   const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
@@ -44,7 +50,7 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
                   <span className="film-card__year">{films[match.params.id].released}</span>
                 </p>
                 <div className="film-card__buttons">
-                  <button className="btn btn--play film-card__button" type="button">
+                  <button onClick={() => browserHistory.push(`/player/${films[match.params.id].id - 1}`)} className="btn btn--play film-card__button" type="button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -56,7 +62,7 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <Link to={`/films/${match.params.id}/review`} className="btn film-card__button">Add review</Link>
+                  {authorizationStatus === AuthorizationStatus.AUTH && <Link to={`/films/${match.params.id}/review`} className="btn film-card__button">Add review</Link>}
                 </div>
               </div>
             </div>
@@ -85,7 +91,7 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
                 </nav>
                 {selectedPage === FilmPages.OVERVIEW && <Overview film={films[match.params.id]} />}
                 {selectedPage === FilmPages.DETAILS && <Details film={films[match.params.id]} />}
-                {selectedPage === FilmPages.REVIEWS && <Reviews film={films[match.params.id]} />}
+                {selectedPage === FilmPages.REVIEWS && <Reviews reply={reply} />}
               </div>
             </div>
           }
@@ -120,14 +126,19 @@ function Film({films, likeThis, getFilmsLikeThis, history, location, match}) {
 
 Film.propTypes = filmPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
+const mapStateToProps = ({FILMS, USER}) => ({
   films: FILMS.films,
   likeThis: FILMS.likeThis,
+  reply: FILMS.reply,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getFilmsLikeThis(id) {
     dispatch(fetchFilmsLikeThis(id));
+  },
+  getComments(id) {
+    dispatch(fetchComments(id));
   },
 });
 

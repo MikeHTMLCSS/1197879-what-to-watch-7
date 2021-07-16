@@ -1,24 +1,7 @@
 import PropTypes from 'prop-types';
+import {moviePropTypesModel} from '../../prop-types/movie-prop-types-model.jsx';
 
 export const myListPropTypes = {
-  myFilms: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({
-    index: PropTypes.number,
-    title: PropTypes.string,
-    posterSrc: PropTypes.string,
-    previewSrc: PropTypes.string,
-    backgroundSrc: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    videoSrc: PropTypes.string,
-    previewVideoSrc: PropTypes.string,
-    description: PropTypes.string,
-    rating: PropTypes.number,
-    ratingNumber: PropTypes.number,
-    director: PropTypes.string,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    released: PropTypes.number,
-    isFavorite: PropTypes.bool,
-  })), PropTypes.bool]).isRequired,
+  myFilms: PropTypes.oneOfType([PropTypes.arrayOf(moviePropTypesModel), PropTypes.bool]).isRequired,
   getMyFilmsList: PropTypes.func.isRequired,
 };

@@ -7,6 +7,7 @@ export const ActionType = {
   GET_PROMO_FILM: 'data/getPromoFilm',
   GET_MY_FILMS_LIST: 'data/getMyFilmsList',
   GET_FILMS_LIKE_THIS: 'data/getFilmsLikeThis',
+  GET_COMMENTS: 'data/getComments',
   CHOOSE_GENRE: 'filmsLlist/chooseGenre',
 };
 
@@ -33,6 +34,13 @@ export const getMyFilmsList = createAction(ActionType.GET_MY_FILMS_LIST, (myFilm
 export const getFilmsLikeThis = createAction(ActionType.GET_FILMS_LIKE_THIS, (filmsLikeThis, id) => ({
   payload: {
     filmsLikeThis: filmsLikeThis,
+    id: id,
+  },
+}));
+
+export const getComments = createAction(ActionType.GET_COMMENTS, (comments, id) => ({
+  payload: {
+    comments: comments,
     id: id,
   },
 }));

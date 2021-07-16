@@ -10,6 +10,7 @@ export const APIRoute = {
   PROMO: '/promo',
   FAVORITE: '/favorite',
   SIMILAR: '/similar',
+  COMMENTS: '/comments',
 };
 export const RoutePath = {
   MAIN: '/',
@@ -52,3 +53,4 @@ export const FilmPages = {
   REVIEWS: 'reviews',
 };
 export const SHOW_FILMS_NUMBER = 8;
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

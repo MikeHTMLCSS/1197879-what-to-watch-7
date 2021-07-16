@@ -1,4 +1,4 @@
-import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../../store/action/action.js';
+import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments} from '../../store/action/action.js';
 import {APIRoute} from '../../consts.js';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -39,4 +39,15 @@ export const fetchMyFilmsList = () => (dispatch, _getState, api) => (
 export const fetchFilmsLikeThis = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${id}${APIRoute.SIMILAR}`)
     .then(({data}) => dispatch(getFilmsLikeThis(data, id)))
+);
+
+export const fetchComments = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.COMMENTS}/${id}`)
+    .then(({data}) => dispatch(getComments(data, id)))
+);
+
+export const writeComment = (id, {rating, reviewText: comment}, redirect, fixBadRequest) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
+    .then(() => redirect())
+    .catch(() => fixBadRequest())
 );

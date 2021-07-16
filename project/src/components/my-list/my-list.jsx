@@ -13,7 +13,9 @@ function MyList({myFilms, getMyFilmsList}) {
   const [selectedMovie, setSelectedMovie] = useState(-1);
   return (
     <div className="user-page">
-      <Header title={'My list'} modifierClass={'user-page__head'} />
+      <Header modifierClass={'user-page__head'}>
+        <h1 className="page-title user-page__title">My list</h1>
+      </Header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">

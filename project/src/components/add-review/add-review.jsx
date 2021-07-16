@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Header from '../header/header.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 import {addReviewPropTypes} from './add-review-prop-types.jsx';
 
-function AddReview({films, history, location, match}) {
+function AddReview({films, match}) {
   return (
     <section className="film-card film-card--full">
       {
@@ -14,14 +15,7 @@ function AddReview({films, history, location, match}) {
             <img src={films[match.params.id].backgroundSrc} alt={films[match.params.id].title} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+          <Header modifierClass="">
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
@@ -32,25 +26,18 @@ function AddReview({films, history, location, match}) {
                 </li>
               </ul>
             </nav>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to="/login" className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
-          </header>
+          </Header>
           <div className="film-card__poster film-card__poster--small">
             <img src={films[match.params.id].posterSrc} alt={films[match.params.id].title} width="218" height="327" />
           </div>
         </div>
       }
-      <div className="add-review">
-        <ReviewForm />
-      </div>
+      {
+        films &&
+        <div className="add-review">
+          <ReviewForm id={films[match.params.id].id} />
+        </div>
+      }
     </section>
   );
 }

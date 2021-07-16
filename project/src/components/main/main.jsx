@@ -7,6 +7,7 @@ import MovieList from '../movie-list/movie-list.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
 import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
 import {SHOW_FILMS_NUMBER} from '../../consts.js';
+import {browserHistory} from '../../services/browser-history.js';
 
 function Main({films, promoFilm, getPromoFilm}) {
   useEffect(() => {
@@ -24,7 +25,7 @@ function Main({films, promoFilm, getPromoFilm}) {
           </div>
         }
         <h1 className="visually-hidden">WTW</h1>
-        <Header modifierClass={'film-card__head'} />
+        <Header modifierClass={'film-card__head'}></Header>
         {
           promoFilm &&
           <div className="film-card__wrap">
@@ -39,7 +40,7 @@ function Main({films, promoFilm, getPromoFilm}) {
                   <span className="film-card__year">{promoFilm.released}</span>
                 </p>
                 <div className="film-card__buttons">
-                  <button className="btn btn--play film-card__button" type="button">
+                  <button onClick={() => browserHistory.push(`/player/${promoFilm.id - 1}`)} className="btn btn--play film-card__button" type="button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
