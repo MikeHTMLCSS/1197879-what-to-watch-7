@@ -4,17 +4,24 @@ import {connect} from 'react-redux';
 import Header from '../header/header.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
+import MyButton from '../my-button/my-button.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
 import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
-import {SHOW_FILMS_NUMBER} from '../../consts.js';
+import {SHOW_FILMS_NUMBER, AuthorizationStatus} from '../../consts.js';
 import {browserHistory} from '../../services/browser-history.js';
 
-function Main({films, promoFilm, getPromoFilm}) {
+function Main({authorizationStatus, films, promoFilm, getPromoFilm}) {
   useEffect(() => {
     getPromoFilm();
   }, [getPromoFilm]);
   const [selectedMovie, setSelectedMovie] = useState(-1);
   const [showedFilmsNumber, setShowedFilmsNumber] = useState(SHOW_FILMS_NUMBER);
+  const [isPromoFavorite, setIsPromoFavorite] = useState(false);
+  useEffect(() => {
+    if (promoFilm) {
+      setIsPromoFavorite(promoFilm.isFavorite);
+    }
+  }, [promoFilm]);
   return (
     <Fragment>
       <section className="film-card">
@@ -46,12 +53,7 @@ function Main({films, promoFilm, getPromoFilm}) {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list film-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  {authorizationStatus === AuthorizationStatus.AUTH && <MyButton id={`${promoFilm.id - 1}`} isFavorite={isPromoFavorite} updatePromo={() => setIsPromoFavorite(!isPromoFavorite)} />}
                 </div>
               </div>
             </div>
@@ -90,7 +92,8 @@ function Main({films, promoFilm, getPromoFilm}) {
 
 Main.propTypes = mainPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
+const mapStateToProps = ({FILMS, USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
   films: FILMS.films,
   promoFilm: FILMS.promoFilm,
 });

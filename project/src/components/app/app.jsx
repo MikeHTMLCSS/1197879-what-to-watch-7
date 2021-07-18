@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {RoutePath} from '../../consts.js';
 import PrivateRoute from '../private-route/private-route.jsx';
+import IdRoute from '../id-route/id-route.jsx';
 import Main from '../main/main.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import MyList from '../my-list/my-list.jsx';
@@ -27,9 +28,9 @@ function App({checkAuthorization, getFilmsList}) {
         <SignIn />
       </Route>
       <PrivateRoute path={RoutePath.MY_LIST} exact render={(props) => <MyList {...props} />} />
-      <Route path={RoutePath.FILM} exact render={(props) => <Film {...props} />} />
-      <PrivateRoute path={RoutePath.ADD_REVIEW} exact render={(props) => <AddReview {...props} />} />
-      <Route path={RoutePath.PLAYER} exact render={(props) => <Player {...props} />} />
+      <Route path={RoutePath.FILM} exact render={(props) => <IdRoute render={({match}) => <Film match={match} />} {...props} />} />
+      <PrivateRoute path={RoutePath.ADD_REVIEW} exact render={(props) => <IdRoute render={({match}) => <AddReview match={match} />} {...props} />} />
+      <Route path={RoutePath.PLAYER} exact render={(props) => <IdRoute render={({match}) => <Player match={match} />} {...props} />} />
       <Route>
         <NotFound />
       </Route>

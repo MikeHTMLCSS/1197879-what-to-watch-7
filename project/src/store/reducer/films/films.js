@@ -1,4 +1,4 @@
-import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments} from '../../action/action.js';
+import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments, changeIsFavoriteStatus} from '../../action/action.js';
 import {adaptFilm} from '../../adapter.js';
 import {createReducer} from '@reduxjs/toolkit';
 
@@ -38,5 +38,8 @@ export const films = createReducer(initialState, (builder) => {
         comments: action.payload.comments,
         id: action.payload.id,
       };
+    })
+    .addCase(changeIsFavoriteStatus, (state, action) => {
+      state.films[action.payload.id].isFavorite = action.payload.status;
     });
 });

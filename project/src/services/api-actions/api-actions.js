@@ -1,4 +1,4 @@
-import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments} from '../../store/action/action.js';
+import {signIn, logoff, getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments, changeIsFavoriteStatus} from '../../store/action/action.js';
 import {APIRoute} from '../../consts.js';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -46,8 +46,13 @@ export const fetchComments = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(getComments(data, id)))
 );
 
-export const writeComment = (id, {rating, reviewText: comment}, redirect, fixBadRequest) => (dispatch, _getState, api) => (
+export const writeComment = (id, {rating, reviewText: comment}, redirect, sayBadRequest) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
     .then(() => redirect())
-    .catch(() => fixBadRequest())
+    .catch(() => sayBadRequest())
+);
+
+export const changeIsFavorite = (status, id) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id + 1}/${+status}`)
+    .then(() => dispatch(changeIsFavoriteStatus(status, id)))
 );

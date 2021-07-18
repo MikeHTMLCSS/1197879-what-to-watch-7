@@ -11,10 +11,12 @@ function ReviewForm({sendComment, id}) {
     reviewText: '',
   });
   const [breakStatus, setBreakStatus] = useState(false);
+  const [isFormSended, setIsFormSended] = useState(false);
   return (
     <form action="#" className="add-review__form" onSubmit={(event) => {
       event.preventDefault();
       sendComment(id, formData, () => browserHistory.push(`/films/${id - 1}`), () => setBreakStatus(true));
+      setIsFormSended(true);
     }}
     >
       <div className="rating">
@@ -36,7 +38,7 @@ function ReviewForm({sendComment, id}) {
       <div className="add-review__text">
         <textarea className="add-review__textarea" name="reviewText" id="review-text" placeholder="Review text" onChange={handleChange} value={formData.reviewText}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={formData.reviewText.length < 50 || !formData.rating}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={formData.reviewText.length < 50 || formData.reviewText.length > 400 || !formData.rating || isFormSended}>Post</button>
         </div>
       </div>
       {breakStatus && <p>Bad Request(</p>}
