@@ -2,6 +2,7 @@ import React, {useRef, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {playerPropTypes} from './player-prop-types.jsx';
+import {PLAYER_UPDATE_SPEED} from '../../consts.js';
 
 function Player({films, match}) {
   const [isPlayerActive, setIsPlayerActive] = useState(false);
@@ -9,17 +10,22 @@ function Player({films, match}) {
   const [duration, setDuration] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   useEffect(() => {
-    setInterval(() => {
+    const playerUpdate = setInterval(() => {
       if (videoElement.current) {
         if (videoElement.current.duration) {
           setDuration(videoElement.current.duration);
         }
         setCurrentTime(videoElement.current.currentTime);
       }
-    }, 1000);
+    }, PLAYER_UPDATE_SPEED);
+    return () => clearInterval(playerUpdate);
   });
   const [isFullscreen, setIsFullscreen] = useState(false);
-  document.addEventListener('keydown', () => setIsFullscreen(false));
+  useEffect(() => {
+    const closeFullscreen = () => setIsFullscreen(false);
+    document.addEventListener('keydown', closeFullscreen);
+    return () => document.removeEventListener('keydown', closeFullscreen);
+  });
   return (
     films &&
     <div className="player">

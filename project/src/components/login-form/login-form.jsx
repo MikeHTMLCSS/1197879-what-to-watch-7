@@ -12,14 +12,24 @@ function LoginForm({signIn}) {
   });
   const [breakStatus, setBreakStatus] = useState(false);
   const [isFormSended, setIsFormSended] = useState(false);
+  let isPasswordValid = false;
+  for (let i = 0; i < formData.password.length; i++) {
+    if (formData.password[i] !== ' ') {
+      isPasswordValid = true;
+    }
+  }
   return (
     <form action="#" className="sign-in__form" onSubmit={(event) => {
       event.preventDefault();
-      signIn(formData, () => browserHistory.push('/'), () => {
+      if (isPasswordValid) {
+        signIn(formData, () => browserHistory.push('/'), () => {
+          setBreakStatus(true);
+          setIsFormSended(false);
+        });
+        setIsFormSended(true);
+      } else {
         setBreakStatus(true);
-        setIsFormSended(false);
-      });
-      setIsFormSended(true);
+      }
     }}
     >
       <div className="sign-in__fields">

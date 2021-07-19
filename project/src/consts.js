@@ -49,4 +49,4 @@ export const FilmPages = {
   REVIEWS: 'reviews',
 };
 export const SHOW_FILMS_NUMBER = 8;
-export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const PLAYER_UPDATE_SPEED = 1000;
