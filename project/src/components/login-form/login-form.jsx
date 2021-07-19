@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginFormPropTypes} from './login-form-prop-types.jsx';
 import {login} from '../../services/api-actions/api-actions.js';
@@ -10,10 +10,16 @@ function LoginForm({signIn}) {
     email: '',
     password: '',
   });
+  const [breakStatus, setBreakStatus] = useState(false);
+  const [isFormSended, setIsFormSended] = useState(false);
   return (
     <form action="#" className="sign-in__form" onSubmit={(event) => {
       event.preventDefault();
-      signIn(formData);
+      signIn(formData, () => browserHistory.push('/'), () => {
+        setBreakStatus(true);
+        setIsFormSended(false);
+      });
+      setIsFormSended(true);
     }}
     >
       <div className="sign-in__fields">
@@ -27,8 +33,9 @@ function LoginForm({signIn}) {
         </div>
       </div>
       <div className="sign-in__submit">
-        <button className="sign-in__btn" type="submit">Sign in</button>
+        <button className="sign-in__btn" type="submit" disabled={isFormSended}>Sign in</button>
       </div>
+      {breakStatus && <p>Bad Request(</p>}
     </form>
   );
 }
@@ -36,8 +43,8 @@ function LoginForm({signIn}) {
 LoginForm.propTypes = loginFormPropTypes;
 
 const mapDispatchToProps = (dispatch) => ({
-  signIn(formData) {
-    dispatch(login(formData, () => browserHistory.push('/')));
+  signIn(formData, redirect, sayBadRequest) {
+    dispatch(login(formData, redirect, sayBadRequest));
   },
 });
 

@@ -4,5 +4,6 @@ export const headerPropTypes = {
   title: PropTypes.string,
   modifierClass: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  avatarSrc: PropTypes.string.isRequired,
   logoff: PropTypes.func.isRequired,
 };

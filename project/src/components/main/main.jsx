@@ -5,23 +5,39 @@ import Header from '../header/header.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import MyButton from '../my-button/my-button.jsx';
+import ShowMore from '../show-more/show-more.jsx';
 import {mainPropTypes} from './main-prop-types.jsx';
 import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
-import {SHOW_FILMS_NUMBER, AuthorizationStatus} from '../../consts.js';
+import {setShowedFilmsNumber} from '../../store/action/action.js';
+import {AuthorizationStatus} from '../../consts.js';
 import {browserHistory} from '../../services/browser-history.js';
+import {SHOW_FILMS_NUMBER} from '../../consts.js';
 
-function Main({authorizationStatus, films, promoFilm, getPromoFilm}) {
+function Main({authorizationStatus, films, promoFilm, getPromoFilm, changeShowedFilmsNumber, showedFilmsNumber, choosedGenre}) {
   useEffect(() => {
     getPromoFilm();
-  }, [getPromoFilm]);
+    changeShowedFilmsNumber(SHOW_FILMS_NUMBER);
+  }, [getPromoFilm, changeShowedFilmsNumber]);
   const [selectedMovie, setSelectedMovie] = useState(-1);
-  const [showedFilmsNumber, setShowedFilmsNumber] = useState(SHOW_FILMS_NUMBER);
   const [isPromoFavorite, setIsPromoFavorite] = useState(false);
   useEffect(() => {
     if (promoFilm) {
       setIsPromoFavorite(promoFilm.isFavorite);
     }
   }, [promoFilm]);
+  let rightFilmsNumber = SHOW_FILMS_NUMBER;
+  if (films) {
+    if (choosedGenre) {
+      rightFilmsNumber = 0;
+      films.forEach((film) => {
+        if (film.genre === choosedGenre) {
+          rightFilmsNumber = rightFilmsNumber + 1;
+        }
+      });
+    } else {
+      rightFilmsNumber = films.length;
+    }
+  }
   return (
     <Fragment>
       <section className="film-card">
@@ -67,10 +83,10 @@ function Main({authorizationStatus, films, promoFilm, getPromoFilm}) {
             <GenreList />
           </ul>
           <div className="catalog__films-list">
-            <MovieList films={films} showedFilmsNumber={showedFilmsNumber} isGenre selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
+            <MovieList films={films} isGenre selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
           </div>
           <div className="catalog__more">
-            <button className="catalog__button" type="button" onClick={() => setShowedFilmsNumber(showedFilmsNumber + SHOW_FILMS_NUMBER)}>Show more</button>
+            {showedFilmsNumber < rightFilmsNumber && <ShowMore />}
           </div>
         </section>
         <footer className="page-footer">
@@ -92,15 +108,20 @@ function Main({authorizationStatus, films, promoFilm, getPromoFilm}) {
 
 Main.propTypes = mainPropTypes;
 
-const mapStateToProps = ({FILMS, USER}) => ({
+const mapStateToProps = ({FILMS, USER, VIEW}) => ({
   authorizationStatus: USER.authorizationStatus,
   films: FILMS.films,
   promoFilm: FILMS.promoFilm,
+  showedFilmsNumber: VIEW.showedFilmsNumber,
+  choosedGenre: VIEW.choosedGenre,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getPromoFilm() {
     dispatch(fetchPromoFilm());
+  },
+  changeShowedFilmsNumber(number) {
+    dispatch(setShowedFilmsNumber(number));
   },
 });
 

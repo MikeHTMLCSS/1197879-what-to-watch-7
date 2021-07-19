@@ -6,4 +6,7 @@ export const mainPropTypes = {
   films: PropTypes.oneOfType([PropTypes.arrayOf(moviePropTypesModel), PropTypes.bool]).isRequired,
   promoFilm: PropTypes.oneOfType([moviePropTypesModel, PropTypes.bool]).isRequired,
   getPromoFilm: PropTypes.func.isRequired,
+  changeShowedFilmsNumber: PropTypes.func.isRequired,
+  showedFilmsNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
+  choosedGenre: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };

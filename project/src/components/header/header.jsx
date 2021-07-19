@@ -5,7 +5,7 @@ import {headerPropTypes} from './header-prop-types.jsx';
 import {AuthorizationStatus} from '../../consts.js';
 import {logout} from '../../services/api-actions/api-actions.js';
 
-function Header({children, modifierClass, authorizationStatus, logoff}) {
+function Header({children, modifierClass, authorizationStatus, avatarSrc, logoff}) {
   return (
     authorizationStatus === AuthorizationStatus.AUTH ?
       <header className={`page-header ${modifierClass}`} >
@@ -20,7 +20,7 @@ function Header({children, modifierClass, authorizationStatus, logoff}) {
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
-              <Link to="/mylist"><img src="img/avatar.jpg" alt="User avatar" width="63" height="63" /></Link>
+              <Link to="/mylist"><img src={avatarSrc} alt="User avatar" width="63" height="63" /></Link>
             </div>
           </li>
           <li className="user-block__item">
@@ -47,6 +47,7 @@ Header.propTypes = headerPropTypes;
 
 const mapStateToProps = ({USER}) => ({
   authorizationStatus: USER.authorizationStatus,
+  avatarSrc: USER.avatarSrc,
 });
 
 const mapDispatchToProps = (dispatch) => ({

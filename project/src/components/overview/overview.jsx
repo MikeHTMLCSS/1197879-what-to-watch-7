@@ -10,7 +10,7 @@ function Overview({film}) {
         <p className="film-rating__meta">
           <span className="film-rating__level">
             {(() => {
-              let ratingType = '';
+              let ratingType = RATING_SCALE[0].type;
               RATING_SCALE.forEach((ratingLevel) => {
                 if (ratingLevel.value <= film.rating) {
                   ratingType = ratingLevel.type;

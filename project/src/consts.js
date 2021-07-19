@@ -42,10 +42,6 @@ export const RATING_SCALE = [
     value: 10,
   },
 ];
-export const Genres = {
-  ALL_GENRES: 'All genres',
-  GENRES: ['Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'],
-};
 export const MOVIE_CARD_TIME = 1000;
 export const FilmPages = {
   OVERVIEW: 'overview',

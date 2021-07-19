@@ -5,14 +5,22 @@ import {RoutePath, AuthorizationStatus} from '../../consts.js';
 import Loading from '../loading/loading.jsx';
 import {privateRoutePropTypes} from './private-route-prop-types.jsx';
 
-function PrivateRoute({render, path, exact, authorizationStatus}) {
+function PrivateRoute({render, path, exact, authorizationStatus, isInvert = false}) {
   switch(authorizationStatus) {
     case AuthorizationStatus.UNKNOWN:
       return <Route path={path} exact={exact} render={(props) => <Loading />} />;
     case AuthorizationStatus.AUTH:
-      return <Route path={path} exact={exact} render={(props) => render(props)} />;
+      if (!isInvert) {
+        return <Route path={path} exact={exact} render={(props) => render(props)} />;
+      } else {
+        return <Route path={path} exact={exact} render={(props) => <Redirect to={RoutePath.MAIN} />} />;
+      }
     case AuthorizationStatus.NOT_AUTH:
-      return <Route path={path} exact={exact} render={(props) => <Redirect to={RoutePath.SIGN_IN} />} />;
+      if (!isInvert) {
+        return <Route path={path} exact={exact} render={(props) => <Redirect to={RoutePath.SIGN_IN} />} />;
+      } else {
+        return <Route path={path} exact={exact} render={(props) => render(props)} />;
+      }
     default:
       return <Route path={path} exact={exact} render={(props) => <Loading />} />;
   }

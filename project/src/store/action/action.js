@@ -10,9 +10,12 @@ export const ActionType = {
   CHANGE_IS_FAVORITE_STATUS: 'films/changeIsFavoriteStatus',
   GET_COMMENTS: 'films/getComments',
   CHOOSE_GENRE: 'view/chooseGenre',
+  SET_SHOWED_FILMS_NUMBER: 'view/setShowedFilmsNumber',
 };
 
-export const signIn = createAction(ActionType.SIGN_IN);
+export const signIn = createAction(ActionType.SIGN_IN, (avatarSrc) => ({
+  payload: avatarSrc,
+}));
 
 export const logoff = createAction(ActionType.LOGOFF);
 
@@ -26,6 +29,10 @@ export const getPromoFilm = createAction(ActionType.GET_PROMO_FILM, (promoFilm) 
 
 export const chooseGenre = createAction(ActionType.CHOOSE_GENRE, (genre) => ({
   payload: genre,
+}));
+
+export const setShowedFilmsNumber = createAction(ActionType.SET_SHOWED_FILMS_NUMBER, (number) => ({
+  payload: number,
 }));
 
 export const getMyFilmsList = createAction(ActionType.GET_MY_FILMS_LIST, (myFilms) => ({

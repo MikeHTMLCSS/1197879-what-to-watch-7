@@ -24,9 +24,7 @@ function App({checkAuthorization, getFilmsList}) {
       <Route path={RoutePath.MAIN} exact>
         <Main />
       </Route>
-      <Route path={RoutePath.SIGN_IN} exact>
-        <SignIn />
-      </Route>
+      <PrivateRoute isInvert path={RoutePath.SIGN_IN} exact render={(props) => <SignIn {...props} />} />
       <PrivateRoute path={RoutePath.MY_LIST} exact render={(props) => <MyList {...props} />} />
       <Route path={RoutePath.FILM} exact render={(props) => <IdRoute render={({match}) => <Film match={match} />} {...props} />} />
       <PrivateRoute path={RoutePath.ADD_REVIEW} exact render={(props) => <IdRoute render={({match}) => <AddReview match={match} />} {...props} />} />

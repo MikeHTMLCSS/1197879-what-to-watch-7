@@ -15,7 +15,10 @@ function ReviewForm({sendComment, id}) {
   return (
     <form action="#" className="add-review__form" onSubmit={(event) => {
       event.preventDefault();
-      sendComment(id, formData, () => browserHistory.push(`/films/${id - 1}`), () => setBreakStatus(true));
+      sendComment(id, formData, () => browserHistory.push(`/films/${id - 1}`), () => {
+        setBreakStatus(true);
+        setIsFormSended(false);
+      });
       setIsFormSended(true);
     }}
     >

@@ -3,22 +3,26 @@ import {APIRoute} from '../../consts.js';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(signIn()))
+    .then(({data}) => dispatch(signIn(data.avatar_url)))
     .catch(() => dispatch(logoff()))
 );
 
-export const login = ({email, password}, redirect) => (dispatch, _getState, api) => (
+export const login = ({email, password}, redirect, sayBadRequest) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
-    .then(({data}) => localStorage.setItem('token', data.token))
-    .then(() => dispatch(signIn()))
-    .then(() => redirect())
-    .catch(() => {})
+    .then(({data}) => {
+      localStorage.setItem('token', data.token);
+      dispatch(signIn(data.avatar_url));
+      redirect();
+    })
+    .catch(() => sayBadRequest())
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
-    .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(logoff()))
+    .then(() => {
+      localStorage.removeItem('token');
+      dispatch(logoff());
+    })
 );
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
