@@ -24,18 +24,12 @@ function ReviewForm({sendComment, id}) {
     >
       <div className="rating">
         <div className="rating__stars">
-          {(() => {
-            const ratingMarkup = [];
-            for (let i = 0; i < 10; i++) {
-              ratingMarkup.push((
-                <Fragment key={i}>
-                  <input className="rating__input" id={`star-${i + 1}`} type="radio" name="rating" value={`${i + 1}`} checked={parseInt(formData.rating, 10) === i + 1} onChange={handleChange} />
-                  <label className="rating__label" htmlFor={`star-${i + 1}`}>Rating {i + 1}</label>
-                </Fragment>
-              ));
-            }
-            return ratingMarkup;
-          })()}
+          {(new Array(10)).fill(null).map((number, i) => (
+            <Fragment key={Math.random()}>
+              <input className="rating__input" id={`star-${10 - i}`} type="radio" name="rating" value={`${10 - i}`} checked={parseInt(formData.rating, 10) === 10 - i} onChange={handleChange} />
+              <label className="rating__label" htmlFor={`star-${10 - i}`}>Rating {10 - i}</label>
+            </Fragment>
+          ))}
         </div>
       </div>
       <div className="add-review__text">
