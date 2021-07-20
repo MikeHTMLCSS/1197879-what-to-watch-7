@@ -1,5 +1,5 @@
 import {view} from './view.js';
-import {chooseGenre} from '../../action/action.js';
+import {chooseGenre, setShowedFilmsNumber} from '../../action/action.js';
 
 describe('Reducer for view', () => {
   it('Should change genre', () => {
@@ -14,6 +14,14 @@ describe('Reducer for view', () => {
     };
     expect(view(state, chooseGenre('Comedy'))).toEqual({
       choosedGenre: 'Comedy',
+    });
+  });
+  it('Should change showed films number', () => {
+    const state = {
+      showedFilmsNumber: 8,
+    };
+    expect(view(state, setShowedFilmsNumber(16))).toEqual({
+      showedFilmsNumber: 16,
     });
   });
 });

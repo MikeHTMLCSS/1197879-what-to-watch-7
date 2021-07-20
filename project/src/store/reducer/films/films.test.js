@@ -1,19 +1,22 @@
 import {films} from './films';
-import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis} from '../../action/action.js';
-import {adaptFilm} from '../../adapter';
+import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments} from '../../action/action.js';
+import {adaptFilm} from './adapt-film.js';
 
 describe('Reducer for films', () => {
   it('Should get films list', () => {
     const state = {
       films: false,
+      genres: false,
     };
     const filmsList = [
       {
         testData: 1,
+        genre: 'Comedy',
       },
     ];
     expect(films(state, getFilmsList(filmsList))).toEqual({
       films: filmsList.map((film) => adaptFilm(film)),
+      genres: ['Comedy'],
     });
   });
   it('Should get promo film', () => {
@@ -102,6 +105,36 @@ describe('Reducer for films', () => {
     expect(films(state, getFilmsLikeThis(filmsLikeThis, id))).toEqual({
       likeThis: {
         films: filmsLikeThis.map((filmLikeThis) => adaptFilm(filmLikeThis)),
+        id: 2,
+      },
+    });
+  });
+  it('Should get comments to one of films', () => {
+    let state = {
+      reply: {
+        comments: false,
+        is: -1,
+      },
+    };
+    let comments = [{testData: 1}];
+    let id = 1;
+    expect(films(state, getComments(comments, id))).toEqual({
+      reply: {
+        comments: [{testData: 1}],
+        id: 1,
+      },
+    });
+    state = {
+      reply: {
+        comments: [{testData: 1}],
+        is: 1,
+      },
+    };
+    comments = [{testData: 2}];
+    id = 2;
+    expect(films(state, getComments(comments, id))).toEqual({
+      reply: {
+        comments: [{testData: 2}],
         id: 2,
       },
     });

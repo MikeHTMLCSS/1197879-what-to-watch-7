@@ -1,5 +1,5 @@
 import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments, changeIsFavoriteStatus} from '../../action/action.js';
-import {adaptFilm} from './adapter.js';
+import {adaptFilm} from './adapt-film.js';
 import {getGenres} from './get-genres.js';
 import {createReducer} from '@reduxjs/toolkit';
 
