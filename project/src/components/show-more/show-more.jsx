@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {setShowedFilmsNumber} from '../../store/action/action.js';
 import {SHOW_FILMS_NUMBER} from '../../consts.js';
+import {getFilms} from '../../store/reducer/films/selectors.js';
+import {getChoosedGenre, getShowedFilmsNumber} from '../../store/reducer/view/selectors.js';
 import {showMorePropTypes} from './show-more-prop-types.jsx';
 
 function ShowMore({showedFilmsNumber, changeShowedFilmsNumber}) {
@@ -12,10 +14,10 @@ function ShowMore({showedFilmsNumber, changeShowedFilmsNumber}) {
 
 ShowMore.propTypes = showMorePropTypes;
 
-const mapStateToProps = ({FILMS, VIEW}) => ({
-  films: FILMS.films,
-  choosedGenre: VIEW.choosedGenre,
-  showedFilmsNumber: VIEW.showedFilmsNumber,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
+  choosedGenre: getChoosedGenre(state),
+  showedFilmsNumber: getShowedFilmsNumber(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

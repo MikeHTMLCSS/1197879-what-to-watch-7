@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from '../header/header.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
+import {getFilms} from '../../store/reducer/films/selectors.js';
 import {addReviewPropTypes} from './add-review-prop-types.jsx';
 
 function AddReview({films, match}) {
@@ -44,8 +45,8 @@ function AddReview({films, match}) {
 
 AddReview.propTypes = addReviewPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
-  films: FILMS.films,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
 });
 
 export {AddReview};

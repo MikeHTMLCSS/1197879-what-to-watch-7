@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import NotFound from '../not-found/not-found';
+import {getFilms} from '../../store/reducer/films/selectors';
 import {idRoutePropTypes} from './id-route-prop-types.jsx';
 
 function IdRoute({films, render, match}) {
@@ -13,8 +14,8 @@ function IdRoute({films, render, match}) {
 
 IdRoute.propTypes = idRoutePropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
-  films: FILMS.films,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
 });
 
 export {IdRoute};

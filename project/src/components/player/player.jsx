@@ -1,6 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {getFilms} from '../../store/reducer/films/selectors.js';
 import {playerPropTypes} from './player-prop-types.jsx';
 import {PLAYER_UPDATE_SPEED} from '../../consts.js';
 
@@ -81,8 +82,8 @@ function Player({films, match}) {
 
 Player.propTypes = playerPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
-  films: FILMS.films,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
 });
 
 export {Player};

@@ -9,6 +9,8 @@ import Reviews from '../reviews/reviews.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import MyButton from '../my-button/my-button.jsx';
 import {FilmPages, AuthorizationStatus} from '../../consts.js';
+import {getAuthorizationStatus} from '../../store/reducer/user/selectors.js';
+import {getFilms, getLikeThis, getReply} from '../../store/reducer/films/selectors.js';
 import {fetchFilmsLikeThis, fetchComments} from '../../services/api-actions/api-actions.js';
 import {browserHistory} from '../../services/browser-history.js';
 
@@ -118,11 +120,11 @@ function Film({authorizationStatus, films, likeThis, reply, getFilmsLikeThis, ge
 
 Film.propTypes = filmPropTypes;
 
-const mapStateToProps = ({FILMS, USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  films: FILMS.films,
-  likeThis: FILMS.likeThis,
-  reply: FILMS.reply,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  films: getFilms(state),
+  likeThis: getLikeThis(state),
+  reply: getReply(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,6 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {RoutePath, AuthorizationStatus} from '../../consts.js';
 import Loading from '../loading/loading.jsx';
+import {getAuthorizationStatus} from '../../store/reducer/user/selectors.js';
 import {privateRoutePropTypes} from './private-route-prop-types.jsx';
 
 function PrivateRoute({render, path, exact, authorizationStatus, isInvert = false}) {
@@ -28,8 +29,8 @@ function PrivateRoute({render, path, exact, authorizationStatus, isInvert = fals
 
 PrivateRoute.propTypes = privateRoutePropTypes;
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {PrivateRoute};

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Genre from '../genre/genre.jsx';
 import {chooseGenre} from '../../store/action/action.js';
 import {setShowedFilmsNumber} from '../../store/action/action.js';
+import {getGenres} from '../../store/reducer/films/selectors.js';
 import {genreListPropTypes} from './genre-list-prop-types.jsx';
 import {SHOW_FILMS_NUMBER} from '../../consts.js';
 
@@ -17,8 +18,8 @@ function GenreList({changeGenre, changeShowedFilmsNumber, genres}) {
 
 GenreList.propTypes = genreListPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
-  genres: FILMS.genres,
+const mapStateToProps = (state) => ({
+  genres: getGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

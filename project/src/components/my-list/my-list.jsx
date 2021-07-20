@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {myListPropTypes} from './my-list-prop-types';
 import Header from '../header/header.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
+import {getMyFilms} from '../../store/reducer/films/selectors';
 import {fetchMyFilmsList} from '../../services/api-actions/api-actions.js';
 
 function MyList({myFilms, getMyFilmsList}) {
@@ -40,8 +41,8 @@ function MyList({myFilms, getMyFilmsList}) {
 
 MyList.propTypes = myListPropTypes;
 
-const mapStateToProps = ({FILMS}) => ({
-  myFilms: FILMS.myFilms,
+const mapStateToProps = (state) => ({
+  myFilms: getMyFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

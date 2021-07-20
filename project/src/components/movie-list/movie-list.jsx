@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import MovieCard from '../movie-card/movie-card';
 import Loading from '../loading/loading.jsx';
+import {getChoosedGenre, getShowedFilmsNumber} from '../../store/reducer/view/selectors';
 import {MovieListPropTypes} from '../movie-list/movie-list-prop-types';
 
 function MovieList({films, showedFilmsNumber, choosedGenre, isGenre = false, selectedMovie, setSelectedMovie}) {
@@ -31,9 +32,9 @@ function MovieList({films, showedFilmsNumber, choosedGenre, isGenre = false, sel
 
 MovieList.propTypes = MovieListPropTypes;
 
-const mapStateToProps = ({VIEW}) => ({
-  choosedGenre: VIEW.choosedGenre,
-  showedFilmsNumber: VIEW.showedFilmsNumber,
+const mapStateToProps = (state) => ({
+  choosedGenre: getChoosedGenre(state),
+  showedFilmsNumber: getShowedFilmsNumber(state),
 });
 
 export {MovieList};

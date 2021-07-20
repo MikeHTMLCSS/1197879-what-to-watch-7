@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {getChoosedGenre} from '../../store/reducer/view/selectors.js';
 import {genrePropTypes} from './genre-prop-types.jsx';
 
 function Genre({genre, chooseGenre, hideFilms, choosedGenre}) {
@@ -13,8 +14,8 @@ function Genre({genre, chooseGenre, hideFilms, choosedGenre}) {
 
 Genre.propTypes = genrePropTypes;
 
-const mapStateToProps = ({VIEW}) => ({
-  choosedGenre: VIEW.choosedGenre,
+const mapStateToProps = (state) => ({
+  choosedGenre: getChoosedGenre(state),
 });
 
 export {Genre};

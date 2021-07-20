@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {headerPropTypes} from './header-prop-types.jsx';
 import {AuthorizationStatus} from '../../consts.js';
+import {getAuthorizationStatus, getAvatarSrc} from '../../store/reducer/user/selectors.js';
 import {logout} from '../../services/api-actions/api-actions.js';
 
 function Header({children, modifierClass, authorizationStatus, avatarSrc, logoff}) {
@@ -45,9 +46,9 @@ function Header({children, modifierClass, authorizationStatus, avatarSrc, logoff
 
 Header.propTypes = headerPropTypes;
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  avatarSrc: USER.avatarSrc,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  avatarSrc: getAvatarSrc(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -11,13 +11,16 @@ import {fetchPromoFilm} from '../../services/api-actions/api-actions.js';
 import {setShowedFilmsNumber} from '../../store/action/action.js';
 import {AuthorizationStatus} from '../../consts.js';
 import {browserHistory} from '../../services/browser-history.js';
+import {getAuthorizationStatus} from '../../store/reducer/user/selectors.js';
+import {getFilms, getPromoFilm} from '../../store/reducer/films/selectors.js';
+import {getShowedFilmsNumber, getChoosedGenre} from '../../store/reducer/view/selectors.js';
 import {SHOW_FILMS_NUMBER} from '../../consts.js';
 
-function Main({authorizationStatus, films, promoFilm, getPromoFilm, changeShowedFilmsNumber, showedFilmsNumber, choosedGenre}) {
+function Main({authorizationStatus, films, promoFilm, findPromoFilm, changeShowedFilmsNumber, showedFilmsNumber, choosedGenre}) {
   useEffect(() => {
-    getPromoFilm();
+    findPromoFilm();
     changeShowedFilmsNumber(SHOW_FILMS_NUMBER);
-  }, [getPromoFilm, changeShowedFilmsNumber]);
+  }, [findPromoFilm, changeShowedFilmsNumber]);
   const [selectedMovie, setSelectedMovie] = useState(-1);
   const [isPromoFavorite, setIsPromoFavorite] = useState(false);
   useEffect(() => {
@@ -108,16 +111,16 @@ function Main({authorizationStatus, films, promoFilm, getPromoFilm, changeShowed
 
 Main.propTypes = mainPropTypes;
 
-const mapStateToProps = ({FILMS, USER, VIEW}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  films: FILMS.films,
-  promoFilm: FILMS.promoFilm,
-  showedFilmsNumber: VIEW.showedFilmsNumber,
-  choosedGenre: VIEW.choosedGenre,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  films: getFilms(state),
+  promoFilm: getPromoFilm(state),
+  showedFilmsNumber: getShowedFilmsNumber(state),
+  choosedGenre: getChoosedGenre(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPromoFilm() {
+  findPromoFilm() {
     dispatch(fetchPromoFilm());
   },
   changeShowedFilmsNumber(number) {
