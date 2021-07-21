@@ -1,11 +1,9 @@
 import {getFilmsList, getPromoFilm, getMyFilmsList, getFilmsLikeThis, getComments, changeIsFavoriteStatus} from '../../action/action.js';
 import {adaptFilm} from './adapt-film.js';
-import {getGenres} from './get-genres.js';
 import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {
   films: false,
-  genres: false,
   promoFilm: false,
   myFilms: false,
   likeThis: {
@@ -22,7 +20,6 @@ export const films = createReducer(initialState, (builder) => {
   builder
     .addCase(getFilmsList, (state, action) => {
       state.films = action.payload.map((film) => adaptFilm(film));
-      state.genres = getGenres(state.films);
     })
     .addCase(getPromoFilm, (state, action) => {
       state.promoFilm = adaptFilm(action.payload);
