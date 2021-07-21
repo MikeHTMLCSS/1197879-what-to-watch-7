@@ -6,17 +6,14 @@ describe('Reducer for films', () => {
   it('Should get films list', () => {
     const state = {
       films: false,
-      genres: false,
     };
     const filmsList = [
       {
         testData: 1,
-        genre: 'Comedy',
       },
     ];
     expect(films(state, getFilmsList(filmsList))).toEqual({
       films: filmsList.map((film) => adaptFilm(film)),
-      genres: ['Comedy'],
     });
   });
   it('Should get promo film', () => {
